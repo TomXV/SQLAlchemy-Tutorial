@@ -69,4 +69,4 @@ def update():
 
 def delete():
     select_id = input("Row ID?: ")
-    db = db_session.query(Table).filter(Table.id == select_id).delete()
+    db_session.query(Table).filter(Table.id == select_id).delete()
