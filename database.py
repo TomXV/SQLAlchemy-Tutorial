@@ -33,7 +33,7 @@ class Table(Base):
         self.server_id = server_id
         self.channel_id = channel_id
 
-        Base.metadata.create_all(bind = engine)
+Base.metadata.create_all(bind = engine)
 
 # ----------------------------------------------------------------
 # CRUD操作 (Create, read, update, delete)
