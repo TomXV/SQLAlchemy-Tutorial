@@ -113,6 +113,8 @@ No: 0
         if note_sel_num == "1":
             os.system("cls")
             db_session.query(Table).delete()
+            db_session.commit()
 
     else:
         db_session.query(Table).filter(Table.id == sel_row_num).delete()
+        db_session.commit()
