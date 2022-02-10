@@ -3,6 +3,17 @@ from sqlalchemy import create_engine, asc, desc, Column, Integer, Float, String
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
+
+#----------------------------------------------------------------
+# Clear Console
+#----------------------------------------------------------------
+
+def clearConsole():
+    command = "clear"
+    if os.name in ("nt", "dos"):  # If Machine is running on Windows, use cls
+        command = "cls"
+    os.system(command)
+
 # ----------------------------------------------------------------
 # SQLAlchemy
 # ----------------------------------------------------------------
@@ -73,6 +84,7 @@ def update():
 
 def delete():
     sel_row_num = input("Row ID?: ")
+    clearConsole()
     if sel_row_num == "ALL DELETE":
         print(
 """
@@ -86,6 +98,7 @@ No: 0
 )
         sel_num = input("Number?: ")
         if sel_num == "1":
+            clearConsole()
             print(
 """
 ----------------------------------------------------------------
@@ -98,6 +111,7 @@ No: 0
 )
         note_sel_num = input("Number?: ")
         if note_sel_num == "1":
+            os.system("cls")
             db_session.query(Table).delete()
 
     else:
