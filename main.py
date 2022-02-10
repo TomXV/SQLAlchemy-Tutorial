@@ -1,5 +1,6 @@
 import database
-
+from database import clearConsole
+from time import sleep
 
 def method_continue():
     print(
@@ -13,6 +14,7 @@ No: 0
 """
 )
     sel_num = input("Number?: ")
+    clearConsole()
     if sel_num == "1":
         main()
     else:
@@ -35,6 +37,7 @@ Exit: 5
 
 
     sel_menu_num = input("Number?: ")
+    clearConsole()
 
     if sel_menu_num == "1":
         database.create()
@@ -56,3 +59,5 @@ Exit: 5
 
 if __name__ == '__main__':
     main()
+    sleep(1)
+    clearConsole()
