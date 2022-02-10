@@ -55,8 +55,12 @@ def create():
 
 def read():
     db = db_session.query(Table).all()
+    print("----------------------------------------------------------------")
+    print("DATABASE INFOMATION")
+    print("----------------------------------------------------------------")
     for row in db:
-        print(row.id, row.server_id, row.channel_id)
+        print("|", row.id, "|", row.server_id, "|", row.channel_id, "|")
+    print("----------------------------------------------------------------")
 
 
 def update():
