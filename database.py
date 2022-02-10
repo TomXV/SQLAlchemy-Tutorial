@@ -64,13 +64,41 @@ def read():
 
 
 def update():
-    select_id = input("Row ID?: ")
-    db = db_session.query(Table).filter(Table.id == select_id).first()
+    sel_row_num = input("Row ID?: ")
+    db = db_session.query(Table).filter(Table.id == sel_row_num).first()
     db.server_id = input("Server ID?: ")
     db.channel_id = input("Channel ID?: ")
     db_session.commit()
 
 
 def delete():
-    select_id = input("Row ID?: ")
-    db_session.query(Table).filter(Table.id == select_id).delete()
+    sel_row_num = input("Row ID?: ")
+    if sel_row_num == "ALL DELETE":
+        print(
+"""
+----------------------------------------------------------------
+NOTE: DO YOU WANT TO ALL DELETE IN THE DATABASE?
+"----------------------------------------------------------------
+Yes: 1
+No: 0
+----------------------------------------------------------------
+"""
+)
+        sel_num = input("Number?: ")
+        if sel_num == "1":
+            print(
+"""
+----------------------------------------------------------------
+NOTE: IF YOU WANTED TO UNDO YOU CAN'T IT. ARE YOU SURE DELETE?
+"----------------------------------------------------------------
+Yes: 1
+No: 0
+----------------------------------------------------------------
+"""
+)
+        note_sel_num = input("Number?: ")
+        if note_sel_num == "1":
+            db_session.query(Table).delete()
+
+    else:
+        db_session.query(Table).filter(Table.id == sel_row_num).delete()
