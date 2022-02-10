@@ -59,5 +59,3 @@ Exit: 5
 
 if __name__ == '__main__':
     main()
-    sleep(1)
-    clearConsole()
