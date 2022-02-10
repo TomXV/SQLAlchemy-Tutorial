@@ -61,7 +61,7 @@ def read():
 
 def update():
     select_id = input("Row ID?: ")
-    db = db_session.query(Table).filter(Table.id == find_id).first()
+    db = db_session.query(Table).filter(Table.id == select_id).first()
     db.server_id = input("Server ID?: ")
     db.channel_id = input("Channel ID?: ")
     db_session.commit()
