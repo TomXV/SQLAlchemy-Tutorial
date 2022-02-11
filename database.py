@@ -111,7 +111,7 @@ No: 0
 )
         note_sel_num = input("Number?: ")
         if note_sel_num == "1":
-            os.system("cls")
+            clearConsole()
             db_session.query(Table).delete()
             db_session.commit()
 
