@@ -1,12 +1,21 @@
 import os
-from sqlalchemy import create_engine, asc, desc, Column, Integer, Float, String
-from sqlalchemy.orm import scoped_session, sessionmaker
+
+from sqlalchemy import (  # pylint: disable=unused-import
+    Column,
+    Float,
+    Integer,
+    String,
+    asc,
+    create_engine,
+    desc,
+)
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import scoped_session, sessionmaker
 
-
-#----------------------------------------------------------------
+# ----------------------------------------------------------------
 # Clear Console
-#----------------------------------------------------------------
+# ----------------------------------------------------------------
+
 
 def clearConsole():
     command = "clear"
@@ -14,37 +23,36 @@ def clearConsole():
         command = "cls"
     os.system(command)
 
+
 # ----------------------------------------------------------------
 # SQLAlchemy
 # ----------------------------------------------------------------
 
-database_file = os.path.join(os.path.abspath(os.getcwd()), 'database.db')
+database_file = os.path.join(os.path.abspath(os.getcwd()), "database.db")
 
-engine = create_engine('sqlite:///' + database_file, convert_unicode=True, echo=True)
+engine = create_engine("sqlite:///" + database_file, convert_unicode=True, echo=True)
 
 db_session = scoped_session(
-    sessionmaker(
-        autocommit = False,
-        autoflush = False,
-        bind = engine
-    )
+    sessionmaker(autocommit=False, autoflush=False, bind=engine)
 )
 
 
 Base = declarative_base()
 Base.query = db_session.query_property()
 
+
 class Table(Base):
-    __tablename__ = 'Table'
+    __tablename__ = "Table"
     id = Column(Integer, primary_key=True)
     server_id = Column(Integer, unique=False, nullable=False)
     channel_id = Column(Integer, unique=False, nullable=False)
 
-    def __init__(self, server_id = None, channel_id = None):
+    def __init__(self, server_id=None, channel_id=None):
         self.server_id = server_id
         self.channel_id = channel_id
 
-Base.metadata.create_all(bind = engine)
+
+Base.metadata.create_all(bind=engine)
 
 # ----------------------------------------------------------------
 # CRUD操作 (Create, read, update, delete)
@@ -56,10 +64,11 @@ Base.metadata.create_all(bind = engine)
 # db_session.query(Table).order_by(desc())
 # ----------------------------------------------------------------
 
+
 def create():
     input_server_id = input("Server ID?: ")
     input_channel_id = input("Channel ID?: ")
-    row = Table(server_id =input_server_id, channel_id = input_channel_id)
+    row = Table(server_id=input_server_id, channel_id=input_channel_id)
     db_session.add(row)
     db_session.commit()
 
@@ -87,7 +96,7 @@ def delete():
     clearConsole()
     if sel_row_num == "ALL DELETE":
         print(
-"""
+            """
 ----------------------------------------------------------------
 NOTE: DO YOU WANT TO ALL DELETE IN THE DATABASE?
 ----------------------------------------------------------------
@@ -95,12 +104,12 @@ Yes: 1
 No: 0
 ----------------------------------------------------------------
 """
-)
+        )
         sel_num = input("Number?: ")
         if sel_num == "1":
             clearConsole()
             print(
-"""
+                """
 ----------------------------------------------------------------
 NOTE: IF YOU WANTED TO UNDO YOU CAN'T IT. ARE YOU SURE DELETE?
 ----------------------------------------------------------------
@@ -108,7 +117,7 @@ Yes: 1
 No: 0
 ----------------------------------------------------------------
 """
-)
+            )
         note_sel_num = input("Number?: ")
         if note_sel_num == "1":
             clearConsole()

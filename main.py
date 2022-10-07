@@ -1,10 +1,12 @@
+from time import sleep  # pylint: disable=unused-import
+
 import database
 from database import clearConsole
-from time import sleep
+
 
 def method_continue():
     print(
-"""
+        """
 ----------------------------------------------------------------
 Continue?
 ----------------------------------------------------------------
@@ -12,7 +14,7 @@ Yes: 1
 No: 0
 ----------------------------------------------------------------
 """
-)
+    )
     sel_num = input("Number?: ")
     clearConsole()
     if sel_num == "1":
@@ -20,9 +22,10 @@ No: 0
     else:
         exit()
 
+
 def main():
     print(
-"""
+        """
 ----------------------------------------------------------------
 CRUD MENU
 ----------------------------------------------------------------
@@ -33,8 +36,7 @@ Delete: 4
 Exit: 5
 ----------------------------------------------------------------
 """
-)
-
+    )
 
     sel_menu_num = input("Number?: ")
     clearConsole()
@@ -57,5 +59,5 @@ Exit: 5
         main()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
